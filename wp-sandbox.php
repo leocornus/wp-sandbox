@@ -2,6 +2,7 @@
 /**
  * Plugin Name: WordPress Sandbox
  * Plugin URI: http://github.com/leocornus/wp-sandbox
+ * Description: A playgroud to explore and learn WordPress!
  * Veraion: 0.1
  * Author: Sean Chen <sean.chen@leocorn.com>
  */
