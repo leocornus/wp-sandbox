@@ -25,4 +25,11 @@ function wpbox_admin_init() {
                      'manage_options', 
                      'wp-sandbox/admin/settings.php'
                     );
+
+    // the admin page to create posts.
+    add_submenu_page('wp-sandbox/admin/settings.php', // parent slug.
+                     'Create Posts', 'Create Posts',
+                     'manage_options', 
+                     'wp-sandbox/admin/create-posts.php'
+                    );
 }
