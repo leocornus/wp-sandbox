@@ -13,6 +13,12 @@ if (isset($_POST['wpbox_settings_form_submit']) &&
     // get the the post attributes array
     $my_post = array(
         'post_title' => $title,
+        // this the actually the publish date.
+        'post_date' => '2017-09-10',
+        'post_modified' => '2017-09-22',
+        // post Excerpt
+        'post_excerpt' => 'post excerpt',
+        // post content.
         'post_content' => $content,
         // we have to use the IDs of categories to set the categories.
         'post_category' => array(
