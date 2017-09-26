@@ -5,6 +5,24 @@
 if (isset($_POST['wpbox_settings_form_submit']) &&
     $_POST['wpbox_settings_form_submit'] == 'Y') {
 
+    $title = $_POST['wpbox_post_title'];
+    $content = $_POST['wpbox_post_content'];
+
+    // TODO: process title and content.
+
+    // get the the post attributes array
+    $my_post = array(
+        'post_title' => $title,
+        'post_content' => $content,
+        // TODO: set the categories.
+        // set the post status to publish
+        'post_status' => 'publish'
+    );
+
+    $post_id = wp_insert_post($my_post);
+
+    // show the message.
+    echo '<div class="updated"><p><strong>Created Post: ' . $post_id . '</strong></p></div>';
 }
 
 /**
@@ -20,93 +38,28 @@ if (isset($_POST['wpbox_settings_form_submit']) &&
 
 <div class="wrap">
   <h2>WP Sandbox - General Settings</h2>
-  <p>General settings for WordPress Sandbox.</p>
+  <p>General settings for WordPress Sandbox. Try create post!</p>
 
   <form name="wpbox_settings_form" method="post">
     <input type="hidden" name="wpbox_settings_form_submit" value="Y"/>
     <table class="form-table"><tbody>
       <tr>
-        <th>Enable Animation: </th>
-        <td>
-          <input type="radio" name="wpbox_enable_animation" 
-                 value="true"
-            <?php echo (get_site_option('wpbox_enable_animation',
-                                        'false') == 'true') ?
-                'checked' : '';?>
-          > true
-          <input type="radio" name="wpbox_enable_animation" 
-                 value="false"
-            <?php echo (get_site_option('wpbox_enable_animation',
-                                        'false') == 'false') ?
-                'checked' : '';?>
-          > false
+        <th>Post Title: </th>
+        <td><input type="text" id="wpbox_post_title" 
+                   name="wpbox_post_title" 
+                   value="Daily Report - [DATE_FULL]" size="88"/>
         </td>
       </tr>
       <tr>
-        <th>Message Title: </th>
-        <td><input type="text" id="wpbox_message_title" 
-                   name="wpbox_message_title" 
-                   value="<?php echo get_site_option('wpbox_message_title'); ?>" size="88"/>
+        <th>Post Content: </th>
+        <td><input type="text" id="wpbox_post_content" 
+                   name="wpbox_post_content" 
+                   value="[daily-traffic date='[DATE]']" size="88"/>
         </td>
       </tr>
       <tr>
-        <th>Message URL: </th>
-        <td><input type="text" id="wpbox_message_url" 
-                   name="wpbox_message_url" 
-                   value="<?php echo get_site_option('wpbox_message_url'); ?>" size="88"/>
-        </td>
-      </tr>
-      <!-- tr>
-        <th>Message Excerpt: </th>
-        <td><textarea id="wpbox_message_excerpt" rows="2" cols="60"
-                   name="wpbox_message_excerpt"
-            ><?php echo get_site_option('wpbox_message_excerpt'); ?></textarea>
-        </td>
-      </tr -->
-      <tr>
-        <th>Message One Title: </th>
-        <td><input type="text" id="wpbox_message1_title" 
-                   name="wpbox_message1_title" 
-                   value="<?php echo get_site_option('wpbox_message1_title'); ?>" size="88"/>
-        </td>
-      </tr>
-      <tr>
-        <th>Message One URL: </th>
-        <td><input type="text" id="wpbox_message1_url" 
-                   name="wpbox_message1_url" 
-                   value="<?php echo get_site_option('wpbox_message1_url'); ?>" size="88"/>
-        </td>
-      </tr>
-      <tr>
-        <th>Message Two Title: </th>
-        <td><input type="text" id="wpbox_message2_title" 
-                   name="wpbox_message2_title" 
-                   value="<?php echo get_site_option('wpbox_message2_title'); ?>" size="88"/>
-        </td>
-      </tr>
-      <tr>
-        <th>Message Two URL: </th>
-        <td><input type="text" id="wpbox_message2_url" 
-                   name="wpbox_message2_url" 
-                   value="<?php echo get_site_option('wpbox_message2_url'); ?>" size="88"/>
-        </td>
-      </tr>
-      <tr>
-        <th>Message Three Title: </th>
-        <td><input type="text" id="wpbox_message3_title" 
-                   name="wpbox_message3_title" 
-                   value="<?php echo get_site_option('wpbox_message3_title'); ?>" size="88"/>
-        </td>
-      </tr>
-      <tr>
-        <th>Message Three URL: </th>
-        <td><input type="text" id="wpbox_message3_url" 
-                   name="wpbox_message3_url" 
-                   value="<?php echo get_site_option('wpbox_message3_url'); ?>" size="88"/>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row"><input type="submit" name="saveSetting" class="button-primary" value="Save Settings" />
+        <th scope="row"><input type="submit" name="createpost" class="button-primary" 
+            value="Create Post" />
         </th>
         <td></td>
       </tr>
