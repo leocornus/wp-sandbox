@@ -14,7 +14,10 @@ if (isset($_POST['wpbox_settings_form_submit']) &&
     $my_post = array(
         'post_title' => $title,
         'post_content' => $content,
-        // TODO: set the categories.
+        // we have to use the IDs of categories to set the categories.
+        'post_category' => array(
+            159, 15692, 7
+        ),
         // set the post status to publish
         'post_status' => 'publish'
     );
@@ -22,7 +25,8 @@ if (isset($_POST['wpbox_settings_form_submit']) &&
     $post_id = wp_insert_post($my_post);
 
     // show the message.
-    echo '<div class="updated"><p><strong>Created Post: ' . $post_id . '</strong></p></div>';
+    echo '<div class="updated"><p><strong>Created Post: ' . $post_id . 
+         '</strong></p></div>';
 }
 
 /**
