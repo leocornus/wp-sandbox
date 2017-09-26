@@ -10,6 +10,15 @@ if (isset($_POST['wpbox_create_posts_form_submit']) &&
 
     // TODO: process title and content.
 
+    $excerpt = $_POST['wpbox_post_excerpt'];
+    // the category should be a array of integer
+    //'post_category' => array(
+    //    159, 15692, 7
+    //),
+    $category = array_map('intval', 
+                          // this will only give us an array of strings
+                          explode(",", $_POST['wpbox_post_category']));
+
     // get the the post attributes array
     $my_post = array(
         'post_title' => $title,
@@ -17,13 +26,11 @@ if (isset($_POST['wpbox_create_posts_form_submit']) &&
         'post_date' => '2017-09-10',
         'post_modified' => '2017-09-22',
         // post Excerpt
-        'post_excerpt' => 'post excerpt',
+        'post_excerpt' => $excerpt,
         // post content.
         'post_content' => $content,
         // we have to use the IDs of categories to set the categories.
-        'post_category' => array(
-            159, 15692, 7
-        ),
+        'post_category' => $category,
         // set the post status to publish
         'post_status' => 'publish'
     );
@@ -55,10 +62,24 @@ if (isset($_POST['wpbox_create_posts_form_submit']) &&
         </td>
       </tr>
       <tr>
+        <th>Post Excerpt: </th>
+        <td><input type="text" id="wpbox_post_excerpt" 
+                   name="wpbox_post_excerpt" 
+                   value="" size="88"/>
+        </td>
+      </tr>
+      <tr>
         <th>Post Content: </th>
         <td><input type="text" id="wpbox_post_content" 
                    name="wpbox_post_content" 
                    value="[daily-traffic date='[DATE]']" size="88"/>
+        </td>
+      </tr>
+      <tr>
+        <th>Post Category (a list of category id separated by comma):</th>
+        <td><input type="text" id="wpbox_post_category" 
+                   name="wpbox_post_category" 
+                   value="20,30,21" size="88"/>
         </td>
       </tr>
       <tr>
